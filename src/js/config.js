@@ -37,30 +37,39 @@ document.addEventListener("DOMContentLoaded", function() {
 
 document.getElementById('updateForm').addEventListener('submit', async function (event) {
     event.preventDefault(); // Prevent form from refreshing the page
-
+    
+    
+    
+    const formData = new FormData();
+    formData.append('webname', document.getElementById('WebNameSubmitter').value);
+    formData.append('favicon', document.getElementById('FaviconSubmitter').files[0]);
     // Get the new webname from the form
-    const webname = document.getElementById('WebNameSubmitter').value;
-
-    // Send the PUT request to update the web name
+  
     try {
-        const response = await fetch('http://localhost:3000/edit-config', {
+        // Send request to update the web name
+        await fetch('http://localhost:3000/edit-config', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ name: webname }),
+            body: JSON.stringify({ name: formData.get('webname') })
+        });
+
+        // Send request to upload the new favicon
+        const response = await fetch('http://localhost:3000/upload-favicon', {
+            method: 'PUT',
+            body: formData
         });
 
         const result = await response.json();
 
         // Display response message
         if (response.ok) {
-            alert('Web name updated successfully!');
-            location.reload();
+           alert('Web name and favicon updated successfully!');
         } else {
-           alert(`Error: ${result.error}`)
+            alert(`Error: ${result.error}`);
         }
     } catch (error) {
-        alert('Error updating web name.');
+            alert('Error updating web name or favicon.');
     }
 });

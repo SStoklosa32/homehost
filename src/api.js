@@ -6,7 +6,8 @@ const yaml = require('js-yaml');
 const cors = require('cors');
 const app = express();
 const PORT = 3000;
-
+const multer = require('multer')
+const path = require('path');
 // Middleware
 app.use(cors()); // Enable CORS for all routes
 app.use(bodyParser.json());
@@ -134,6 +135,35 @@ app.put('/edit-config', (req, res) => {
         }
     });
 });
+
+// Set up multer for file uploads
+const upload = multer({ dest: 'uploads/' }); // Temporary storage for uploaded files
+
+// API endpoint to edit favicon.ico
+app.put('/upload-favicon', upload.single('favicon'), (req, res) => {
+    if (!req.file) {
+        return res.status(400).json({ error: 'No file uploaded.' });
+    }
+
+    // Path to the existing favicon.ico
+    const faviconPath = path.join(__dirname, './img/favicon.ico');
+
+    // Delete the existing favicon.ico if it exists
+    fs.unlink(faviconPath, (err) => {
+        if (err && err.code !== 'ENOENT') {
+            return res.status(500).json({ error: 'Error deleting existing favicon.' });
+        }
+
+        // Move the new file to the correct location and rename it to favicon.ico
+        fs.rename(req.file.path, faviconPath, (err) => {
+            if (err) {
+                return res.status(500).json({ error: 'Error saving new favicon.' });
+            }
+            res.json({ message: 'Favicon updated successfully!' });
+        });
+    });
+});
+
 
 // Start the server
 app.listen(PORT, () => {

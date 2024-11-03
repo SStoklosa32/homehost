@@ -10,9 +10,7 @@ async function fetchConfig() {
         const config = await response.json(); // Parse the JSON response
 
         // Storing the first part of the data in variables
-        const name = config.Name;      
-        const numberOfCards = config.NumberOfCards;
-        
+        const name = config.Name;        
       
     const WebName = document.getElementById("WebName");
     const WebTitle = document.getElementById("WebTitle");
