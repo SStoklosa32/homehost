@@ -1,0 +1,20 @@
+Name: My App
+FontFamily: Arial, sans-serif
+FontSize: 16px
+BackgroundIMGName: background.jpg
+LogoIMGName: logo.png
+FaviconIMGName: favicon.ico
+NumberOfCards: 3
+Cards:
+  card1:
+    CardName: Card One
+    URL: http://example.com/card1
+    Port: 8080
+  card2:
+    CardName: Card Two
+    URL: http://example.com/card2
+    Port: 8081
+  card3:
+    CardName: Card Three
+    URL: http://example.com/card3
+    Port: 8082

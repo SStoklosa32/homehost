@@ -1,0 +1,22 @@
+{
+  "name": "homehost",
+  "version": "1.0.0",
+  "description": "A simple yet customizable homepage for all your self-host needs.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server ."
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "fs": "^0.0.1-security",
+    "js-yaml": "^4.1.0"
+  }
+}
