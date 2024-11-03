@@ -8,3 +8,4 @@ A simple yet customizable homepage for all your self-host needs.
 <br>- Editing via UI (next feature as it's a major need)
 <br>- Loading everything locally to reduce load time
 <br>- Allowing better customization
+<br>- Mobile Support
